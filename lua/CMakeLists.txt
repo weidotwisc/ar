@@ -11,7 +11,7 @@ SET(luasrc init.lua)
 
 ADD_TORCH_PACKAGE(lar "${src}" "${luasrc}")
 
-TARGET_LINK_LIBRARIES(lar luaT TH)
+TARGET_LINK_LIBRARIES(lar luaT TH ar)
 IF(LUALIB)
   TARGET_LINK_LIBRARIES(lar ${LUALIB})
 ENDIF()
