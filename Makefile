@@ -9,14 +9,14 @@ LIBDIR := lib
 ARLIB := $(LIBDIR)/libar.so
 
 ./src/%.o: ./src/%.cpp
-	$(MPICXX)  -c $< -o $@
+	$(MPICXX)  -fpic -shared -c $< -o $@
 
 ./test/%.o: ./test/%.cpp	
 	$(CXX) -O3 -c -I${AR_HOME}/include $< -o $@
 all:libar
 
 $(ARLIB):	$(AR_OBJS)  $(LIBDIR)
-	$(MPICXX) -fpic -shared $(AR_OBJS) -o $@ 
+	$(MPICXX) -fpic -shared $(AR_OBJS) -L{MPI_HOME}/lib -o $@ 
 
 
 $(LIBDIR): $(AR_OBJS) 
