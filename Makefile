@@ -16,7 +16,7 @@ ARLIB := $(LIBDIR)/libar.so
 all:libar
 
 $(ARLIB):	$(AR_OBJS)  $(LIBDIR)
-	$(MPICXX) -fpic -shared $(AR_OBJS) -L{MPI_HOME}/lib -o $@ 
+	$(MPICXX) -fpic -shared $(AR_OBJS) -L${MPI_HOME}/lib -o $@ 
 
 
 $(LIBDIR): $(AR_OBJS) 
