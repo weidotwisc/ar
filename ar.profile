@@ -17,5 +17,13 @@ then
      export MPI_INCL_DIR=${MPI_HOME}/include
      export MPI_LIB_DIR=${MPI_HOME}/lib
      export CXX=g++
+elif [ x$AR_PLATFORM == "xdigits" ] 
+then
+     echo "digits"
+     export MPI_HOME=/raid/weiz/install
+     export MPICXX=${MPI_HOME}/bin/mpicxx
+     export MPI_INCL_DIR=${MPI_HOME}/include
+     export MPI_LIB_DIR=${MPI_HOME}/lib
+     export CXX=g++
 fi
      
