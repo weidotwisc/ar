@@ -1,6 +1,7 @@
 require 'xlua'
 require 'optim'
 require 'nn'
+require 'ar'
 dofile './provider.lua'
 local c = require 'trepl.colorize'
 
@@ -16,6 +17,7 @@ opt = lapp[[
    --max_epoch                (default 300)           maximum number of iterations
    --backend                  (default nn)            backend
    --type                     (default cuda)          cuda/float/cl
+   --np                       (default 1)             number of processes
 ]]
 
 print(opt)
@@ -134,6 +136,8 @@ function train()
       return f,gradParameters
     end
     optim.sgd(feval, parameters, optimState)
+    ar.allreduce(parameters, parameters:size())
+    parameters:div(opt.np)
   end
 
   confusion:updateValids()
@@ -208,10 +212,11 @@ function test()
   confusion:zero()
 end
 
-
+ar.init()
 for i=1,opt.max_epoch do
   train()
   test()
 end
+ar.finalize()
 
 
