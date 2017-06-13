@@ -136,7 +136,7 @@ function train()
       return f,gradParameters
     end
     optim.sgd(feval, parameters, optimState)
-    ar.allreduce(parameters, parameters:size())
+    ar.allreduce(parameters, parameters:size()[1])
     parameters:div(opt.np)
   end
 
