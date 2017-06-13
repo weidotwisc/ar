@@ -7,17 +7,26 @@
 #include "ar.h"
 
 #include<mpi.h>
+#include <iostream>
 //#include <cuda.h>
 //#include <cuda_runtime_api.h>
 #ifdef __cplusplus
 extern "C"{
 #endif
 void init(){
-	MPI_Init(NULL, NULL);
+	int provided, claimed;
+	MPI_Init_thread( 0, 0,  MPI_THREAD_MULTIPLE, &provided );// just ask for  MPI_THREAD_MULTIPLE for now
+	if(provided < MPI_THREAD_MULTIPLE){
+		std::cerr<<" the provided level MPI thread support is "<<provided<<std::endl;
+		exit(1);
+	}
+	std::cout<<"MPI thread support is at level "<<provided<<std::endl;
+
 }
 
 
 void allreduce(float *buf, int count){
+
 	MPI_Allreduce(MPI_IN_PLACE, buf, count, MPI_FLOAT, MPI_SUM,MPI_COMM_WORLD);
 }
 
