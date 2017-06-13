@@ -5,7 +5,7 @@
  *      Author: weiz
  */
 #include "ar.h"
-
+#include <stdlib.h>
 #include<mpi.h>
 #include <iostream>
 //#include <cuda.h>
