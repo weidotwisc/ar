@@ -2,6 +2,7 @@ require 'xlua'
 require 'optim'
 require 'nn'
 require 'ar'
+require 'cutorch'
 dofile './provider.lua'
 local c = require 'trepl.colorize'
 
@@ -21,6 +22,13 @@ opt = lapp[[
 ]]
 
 print(opt)
+
+ar.init()
+rank = ar.get_rank()
+gpuID = rank%4 + 1 -- assume we always have 4 GPUs on a server
+print('GPUID ', gpuID)
+cutorch.setDevice(gpuID) 
+
 
 do -- data augmentation module
   local BatchFlip,parent = torch.class('nn.BatchFlip', 'nn.Module')
@@ -212,7 +220,7 @@ function test()
   confusion:zero()
 end
 
-ar.init()
+
 for i=1,opt.max_epoch do
   train()
   test()

@@ -60,7 +60,7 @@ static int lar_finalize(lua_State *L){
   return 0;
 }
 
-static int lgadei_get_rank(lua_State *L){
+static int lar_get_rank(lua_State *L){
 	int res = getRank();
 	lua_pushinteger(L, res); // push integer on the stack
 	return 1; // 1 means the number of returns is 1
@@ -68,6 +68,7 @@ static int lgadei_get_rank(lua_State *L){
 
 static const struct luaL_Reg lar_functions[] = {
 	{ "init",          lar_init   },
+	{ "get_rank",          lar_get_rank   },
 	{ "allreduce",		   lar_allreduce},
 	{ "finalize", lar_finalize},
 	{ NULL,            NULL                 },
