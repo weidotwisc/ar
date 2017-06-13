@@ -28,6 +28,10 @@ function ar.finalize()
    _lar.finalize()
 end
 
+function ar.get_rank()
+  return _lar.get_rank()
+end
+
 function ar.allreduce(t, cnt)
    _lar.allreduce(t:storage(), cnt)
 end

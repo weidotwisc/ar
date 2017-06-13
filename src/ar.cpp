@@ -21,6 +21,11 @@ void allreduce(float *buf, int count){
 	MPI_Allreduce(MPI_IN_PLACE, buf, count, MPI_FLOAT, MPI_SUM,MPI_COMM_WORLD);
 }
 
+int getRank(){
+	int rank;
+	 MPI_Comm_rank (MPI_COMM_WORLD, &rank);
+	 return rank;
+}
 void finalize(){
 	MPI_Finalize();
 }

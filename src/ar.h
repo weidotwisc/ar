@@ -12,7 +12,7 @@
 extern "C" {
 #endif
 void init();
-
+int getRank();
 void allreduce(float *buf, int cnt);
 
 void finalize();
